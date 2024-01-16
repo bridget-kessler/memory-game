@@ -1,0 +1,21 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 150 150" style="enable-background:new 0 0 150 150;" xml:space="preserve">
+<style type="text/css">
+    @media (prefers-color-scheme: dark) {
+        .card{fill: #fff}
+    }
+    @media (prefers-color-scheme: light) {
+        .card{fill: #000}
+    }
+
+</style>
+    <g>
+        <path class="card" d="M58.2,65H6.8C3,65,0,62,0,58.2V6.8C0,3,3,0,6.8,0h51.5C62,0,65,3,65,6.8v51.5C65,62,62,65,58.2,65z"/>
+    </g>
+    <g>
+        <path class="card" d="M58.2,150H6.8C3,150,0,147,0,143.2V91.8C0,88,3,85,6.8,85h51.5c3.7,0,6.8,3,6.8,6.8v51.5C65,147,62,150,58.2,150z"/>
+    </g>
+    <g>
+        <path class="card" d="M143.2,65H91.8C88,65,85,62,85,58.2V6.8C85,3,88,0,91.8,0h51.5c3.7,0,6.8,3,6.8,6.8v51.5C150,62,147,65,143.2,65z"/>
+    </g>
+</svg>
