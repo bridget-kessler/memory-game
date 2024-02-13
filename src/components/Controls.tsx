@@ -31,12 +31,12 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
   const { transitionGame } = useContext(GameContext);
 
   return (
-    <div className="flex flex-wrap gap-2 items-center">
+    <div className="flex flex-wrap gap-3 items-center">
       <Stopwatch isPaused={isPaused} score={score} />
       <StyledTooltip title={isPaused ? "Resume" : "Pause"} placement="bottom">
         <button
           onClick={() => setIsPaused(!isPaused)}
-          className="bg-black rounded-full flex items-center justify-center h-10 w-10"
+          className="bg-black rounded-full flex items-center justify-center h-8 w-8 p-2"
         >
           {isPaused ? (
             <IoPlay className="fill-stone" />
@@ -53,7 +53,7 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
               exitAnimation()
             }
           }}
-          className="bg-black rounded-full flex items-center justify-center h-10 w-10"
+          className="bg-black rounded-full flex items-center justify-center h-8 w-8 p-2"
         >
           <FaUndoAlt className="fill-stone" />
         </button>
@@ -64,7 +64,7 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
         } pairs of matching cards in this deck. Flip over the cards until you've found all the matches! Only two cards can be face up at the same time.`}
         placement="bottom-end"
       >
-        <button className="bg-black rounded-full flex items-center justify-center h-10 text-stone px-5">
+        <button className="bg-black rounded-full flex items-center justify-center h-8 text-stone px-3">
           Hint
         </button>
       </StyledTooltip>

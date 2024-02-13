@@ -34,9 +34,9 @@ const GameBoard = ({ exitAnimation }: Props) => {
   return (
     <div className="grid grid-rows-gameboard h-full">
       <Navbar>
-        <div className="flex items-center justify-center w-[18rem] gap-5">
-          <p className="">{"Score: " + score}</p>
-          <div className="grow">
+        <div className="flex flex-wrap grow items-center gap-x-5">
+          <p className="m-0">{"Matches Found: " + score}</p>
+          <div className="w-full max-w-60">
             <LinearProgress
               variant="determinate"
               value={(score * 100) / (Math.pow(gridSize, 2) / 2)}
