@@ -7,7 +7,7 @@ type Props = {
 const AriaLiveRegion = ({ children }: Props) => {
     
     return (
-        <div className="sr-only" aria-live="polite" aria-atomic>
+        <div data-testid={"aria-live"} className="sr-only" aria-live="polite" aria-atomic>
             {children}
         </div>
     )

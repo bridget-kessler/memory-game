@@ -1,12 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
-import StartGame from "./StartGame";
+import StartGame from "../StartGame";
 import { useContext } from "react";
-import { GameContext } from "../contexts/gameContext";
-import LoadingScreen from "./LoadingScreen";
-import SlideIn from "./layout/SlideIn";
-import GameBoard from "./Gameboard";
-import GameOver from "./GameOver";
-import AriaLiveRegion from "./layout/AriaLiveRegion";
+import { GameContext } from "../../contexts/gameContext";
+import LoadingScreen from "../LoadingScreen";
+import SlideIn from "../layout/SlideIn";
+import GameBoard from "../Gameboard";
+import GameOver from "../GameOver";
+import AriaLiveRegion from "../layout/AriaLiveRegion";
 
 const Game = () => {
   const { gameStatus } = useContext(GameContext);

@@ -1,4 +1,4 @@
-import Game from './components/Game';
+import Game from './components/Game/Game';
 import { GameContextProvider } from './contexts/gameContext';
 import { LevelContextProvider } from './contexts/levelContext';
 import { ArtContextProvider } from './contexts/artContext';
