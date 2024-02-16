@@ -1,7 +1,7 @@
 export const fallbackData = [
   {
     id: "25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e",
-    img_url: "https://www.artic.edu/iiif/225c31d8d-21a4-9ea1-1d73-6a2eca4dda7e/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e/full/843,/0/default.jpg",
     alt_text: "Painting of bedroom, blue walls, green window, tan bed, red bedding.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "The Bedroom",
@@ -13,7 +13,7 @@ export const fallbackData = [
   },
   {
     id: "26d3cea8-44c0-bfbd-a91a-19a007517152",
-    img_url: "https://www.artic.edu/iiif/226d3cea8-44c0-bfbd-a91a-19a007517152/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/26d3cea8-44c0-bfbd-a91a-19a007517152/full/843,/0/default.jpg",
     alt_text: "Painting of a red-haired, bearded man with light skin, painted in short brushstrokes and multicolored dots. The background is likewise a mass of small, closely spaced colored dots, these in green, blue, and red-orange.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Self-Portrait",
@@ -25,7 +25,7 @@ export const fallbackData = [
   },
   {
     id: "9ea77636-76e9-9031-6b92-ff34512d7cbc",
-    img_url: "https://www.artic.edu/iiif/29ea77636-76e9-9031-6b92-ff34512d7cbc/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/9ea77636-76e9-9031-6b92-ff34512d7cbc/full/843,/0/default.jpg",
     alt_text: "Lush tall grasses with small white flowers foreground a grove of bushy trees of varying types and heights, their leaves ranging from deep green to golden. Beneath a dense and heavy yellow sky, a small blue triangle suggesting a mountain peak crests above the treeline at far left.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "The Poet's Garden",
@@ -37,7 +37,7 @@ export const fallbackData = [
   },
   {
     id: "1d3a275d-45dd-6026-b6ed-d7d8df417a3d",
-    img_url: "https://www.artic.edu/iiif/21d3a275d-45dd-6026-b6ed-d7d8df417a3d/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/1d3a275d-45dd-6026-b6ed-d7d8df417a3d/full/843,/0/default.jpg",
     alt_text: "Painting in tones of gray and brown, with some green and blue, of a woman digging with a garden tool before a structure with a thatched roof that descends almost to the ground. Above her the sky is gray and blue, a haze of clouds.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "A Peasant Woman Digging in Front of Her Cottage",
@@ -49,7 +49,7 @@ export const fallbackData = [
   },
   {
     id: "d0ff5b36-bb38-b156-6042-5c8545352c2f",
-    img_url: "https://www.artic.edu/iiif/2d0ff5b36-bb38-b156-6042-5c8545352c2f/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/d0ff5b36-bb38-b156-6042-5c8545352c2f/full/843,/0/default.jpg",
     alt_text: "Painting of three male figures, two older men in top hats and a younger man with red hair, standing outdoors around a wooden table with a pitcher on it, drinking from glasses. A much smaller, childlike figure at left peers over the table and drinks from a white cup. The scene is rendered in winding paint strokes in shades of green and blue.",
     artist: "Vincent van Gogh\nDutch, 1853–1890",
     title: "The Drinkers",
@@ -61,7 +61,7 @@ export const fallbackData = [
   },
   {
     id: "5512cee9-6d00-d01b-b0be-ac7843cc8f76",
-    img_url: "https://www.artic.edu/iiif/25512cee9-6d00-d01b-b0be-ac7843cc8f76/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/5512cee9-6d00-d01b-b0be-ac7843cc8f76/full/843,/0/default.jpg",
     alt_text: "Painting in short strokes of pale blue, green, white, yellow, and pink, of a fisherman in one of two small boats on a river, a tree-lined bank and a bridge in the background.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Fishing in Spring, the Pont de Clichy (Asnières)",
@@ -73,7 +73,7 @@ export const fallbackData = [
   },
   {
     id: "9325e3ea-2d5d-120f-5bfb-faa0f8266ca6",
-    img_url: "https://www.artic.edu/iiif/29325e3ea-2d5d-120f-5bfb-faa0f8266ca6/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/9325e3ea-2d5d-120f-5bfb-faa0f8266ca6/full/843,/0/default.jpg",
     alt_text: "A work made of oil on canvas.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Madame Roulin Rocking the Cradle (La berceuse)",
@@ -85,7 +85,7 @@ export const fallbackData = [
   },
   {
     id: "6cb22407-be79-bf0a-1a63-fdf2b99e035b",
-    img_url: "https://www.artic.edu/iiif/26cb22407-be79-bf0a-1a63-fdf2b99e035b/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/6cb22407-be79-bf0a-1a63-fdf2b99e035b/full/843,/0/default.jpg",
     alt_text: "A work made of oil on canvas, mounted on pressboard.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Terrace and Observation Deck at the Moulin de Blute-Fin, Montmartre",
@@ -97,7 +97,7 @@ export const fallbackData = [
   },
   {
     id: "f11bd233-6cc3-4221-59eb-f7363be4119e",
-    img_url: "https://www.artic.edu/iiif/2f11bd233-6cc3-4221-59eb-f7363be4119e/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/f11bd233-6cc3-4221-59eb-f7363be4119e/full/843,/0/default.jpg",
     alt_text: "A work made of oil on canvas.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Grapes, Lemons, Pears, and Apples",
@@ -109,7 +109,7 @@ export const fallbackData = [
   },
   {
     id: "34f09257-4c7f-3421-7396-e9dba321258a",
-    img_url: "https://www.artic.edu/iiif/234f09257-4c7f-3421-7396-e9dba321258a/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/34f09257-4c7f-3421-7396-e9dba321258a/full/843,/0/default.jpg",
     alt_text: "A work made of reed pen and black-brown ink, with black chalk on off-white wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Weeping Tree",
@@ -121,7 +121,7 @@ export const fallbackData = [
   },
   {
     id: "2568106f-ae26-8932-906b-0c9b3be0cc51",
-    img_url: "https://www.artic.edu/iiif/22568106f-ae26-8932-906b-0c9b3be0cc51/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/2568106f-ae26-8932-906b-0c9b3be0cc51/full/843,/0/default.jpg",
     alt_text: "A work made of black and white chalk, with brush and stumping, brush and black and gray wash, and traces of graphite, over a brush and brown ink underdrawing on ivory wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Weeping Woman",
@@ -133,7 +133,7 @@ export const fallbackData = [
   },
   {
     id: "ce0f0469-5942-ce1a-b946-f25fe523466a",
-    img_url: "https://www.artic.edu/iiif/2ce0f0469-5942-ce1a-b946-f25fe523466a/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/ce0f0469-5942-ce1a-b946-f25fe523466a/full/843,/0/default.jpg",
     alt_text: "A work made of pen and brown ink, with touches of pen and black ink, graphite and graphite frottage, and traces of black chalk, on grayish-white paper laid down on cardboard.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Tetards (Pollards)",
@@ -145,7 +145,7 @@ export const fallbackData = [
   },
   {
     id: "c60f377f-37e3-a5e5-6a49-2099fb475355",
-    img_url: "https://www.artic.edu/iiif/2c60f377f-37e3-a5e5-6a49-2099fb475355/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/c60f377f-37e3-a5e5-6a49-2099fb475355/full/843,/0/default.jpg",
     alt_text: "A work made of charcoal, reed pen and black ink, blue pastel, and white chalk on blue-gray laid paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Cottages with a Woman Working in the Middle Ground",
@@ -157,7 +157,7 @@ export const fallbackData = [
   },
   {
     id: "744cb88d-8420-eedc-b335-db3d0bbe6919",
-    img_url: "https://www.artic.edu/iiif/2744cb88d-8420-eedc-b335-db3d0bbe6919/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/744cb88d-8420-eedc-b335-db3d0bbe6919/full/843,/0/default.jpg",
     alt_text: "A work made of pen and reed pen and brown inks and graphite on cream wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Cypresses",
@@ -169,7 +169,7 @@ export const fallbackData = [
   },
   {
     id: "f9bf9113-e9e1-68ad-19f4-1e7aae2a9946",
-    img_url: "https://www.artic.edu/iiif/2f9bf9113-e9e1-68ad-19f4-1e7aae2a9946/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/f9bf9113-e9e1-68ad-19f4-1e7aae2a9946/full/843,/0/default.jpg",
     alt_text: "A work made of black chalk, with stumping and erasing, on cream wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "The Carrot Puller",
@@ -181,7 +181,7 @@ export const fallbackData = [
   },
   {
     id: "1d789b2f-7821-b5a8-5f84-6fb2549b4e30",
-    img_url: "https://www.artic.edu/iiif/21d789b2f-7821-b5a8-5f84-6fb2549b4e30/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/1d789b2f-7821-b5a8-5f84-6fb2549b4e30/full/843,/0/default.jpg",
     alt_text: "A work made of pen and brown ink over graphite on cream wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Landscape at Arles",
@@ -193,7 +193,7 @@ export const fallbackData = [
   },
   {
     id: "54841cd9-cfdf-9003-50d5-b401dc198ad6",
-    img_url: "https://www.artic.edu/iiif/254841cd9-cfdf-9003-50d5-b401dc198ad6/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/54841cd9-cfdf-9003-50d5-b401dc198ad6/full/843,/0/default.jpg",
     alt_text: "A work made of etching in black on tan wove paper.",
     artist: "Vincent van Gogh\nDutch, 1853-1890",
     title: "Portrait of Dr. Gachet",
@@ -205,7 +205,7 @@ export const fallbackData = [
   },
   {
     id: "b380aac9-c63c-0e0a-b7ad-09c60916defe",
-    img_url: "https://www.artic.edu/iiif/2b380aac9-c63c-0e0a-b7ad-09c60916defe/full/843,/0/default.jpg",
+    img_url: "https://www.artic.edu/iiif/2/b380aac9-c63c-0e0a-b7ad-09c60916defe/full/843,/0/default.jpg",
     alt_text: "A work made of reed pen and iron-gall ink on tan laid paper.",
     artist: "Vincent van Gogh\nDutch, 1853–1890",
     title: "Avenue of Pollard Birches and Poplars",
