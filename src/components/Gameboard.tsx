@@ -1,22 +1,18 @@
-import {
-  useEffect,
-  useState,
-
-  useContext,
-} from "react";
+import { useEffect, useState, useContext } from "react";
 import Grid from "./Grid";
 import Controls from "./Controls";
 import PauseOverlay from "./layout/PauseOverlay";
 import { LevelContext } from "../contexts/levelContext";
-import { LinearProgress } from "@mui/material";
+import { AppBar, LinearProgress, Slide } from "@mui/material";
 import { GameContext } from "../contexts/gameContext";
-import Navbar from "./layout/Navbar";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 type Props = {
   exitAnimation?: () => void;
 };
 
 const GameBoard = ({ exitAnimation }: Props) => {
+  const trigger = useScrollTrigger();
   const { gridSize } = useContext(LevelContext);
   const { transitionGame } = useContext(GameContext);
   const [isPaused, setIsPaused] = useState(false);
@@ -32,28 +28,32 @@ const GameBoard = ({ exitAnimation }: Props) => {
   }, [score]);
 
   return (
-    <div className="grid grid-rows-gameboard h-full">
-      <Navbar>
-        <div className="flex flex-wrap grow items-center gap-x-5">
-          <p className="m-0">{"Matches Found: " + score}</p>
-          <div className="w-full max-w-60">
-            <LinearProgress
-              variant="determinate"
-              value={(score * 100) / (Math.pow(gridSize, 2) / 2)}
-              sx={{
-                height: "20px",
-                border: "2px solid",
-                backgroundColor: "transparent",
-                borderRadius: "10px",
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "black",
-                },
-              }}
-            />
-          </div>
-        </div>
-        <Controls isPaused={isPaused} setIsPaused={setIsPaused} score={score} exitAnimation={exitAnimation} />
-      </Navbar>
+    <div className="grid grid=cols-gameboard h-full">
+      <Slide appear={false} direction="down" in={!trigger}>
+        <AppBar
+          position="sticky"
+          sx={{
+            "&.MuiPaper-root": {
+              top: "1rem",
+              height: "fit-content",
+              width: "fit-content",
+              padding: ".6rem 1rem",
+              background: "transparent",
+              backdropFilter: "blur(5px)",
+              color: "black",
+              margin: "auto",
+              borderRadius: "3rem"
+            },
+          }}
+        >
+          <Controls
+            isPaused={isPaused}
+            setIsPaused={setIsPaused}
+            score={score}
+            exitAnimation={exitAnimation}
+          />
+        </AppBar>
+      </Slide>
       <PauseOverlay isPaused={isPaused}>
         <Grid score={score} setScore={setScore} isPaused={isPaused} />
       </PauseOverlay>
