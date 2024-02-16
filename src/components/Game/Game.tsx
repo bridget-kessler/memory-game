@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import StartGame from "../StartGame";
 import { useContext } from "react";
 import { GameContext } from "../../contexts/gameContext";
@@ -7,65 +7,67 @@ import SlideIn from "../layout/SlideIn";
 import GameBoard from "../Gameboard";
 import GameOver from "../GameOver";
 import AriaLiveRegion from "../layout/AriaLiveRegion";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorMsg from "../layout/ErrorMsg";
 
 const Game = () => {
   const { gameStatus } = useContext(GameContext);
-
+  const [ariaMessage, setAriaMessage] = useState("");
 
   const message = () => {
-      switch(gameStatus) {
-          case "loading":
-              return (
-                  <>Game is loading</>
-              );
-          case "active":
-              return (
-                  <>Game started. Flip over each card to discover their hidden values. Find all the matching pairs of cards to win.</>
-              );
-          case "over":
-              return (
-                  <>Gameover</>
-              );
-          default:
-              return "";
-      }
-  }
+    switch (gameStatus) {
+      case "loading":
+        return <>Game is loading</>;
+      case "active":
+        return <>Game started</>;
+      case "over":
+        return <>Gameover</>;
+      default:
+        return "Game start";
+    }
+  };
 
-  const gameScreen = (): ReactNode  => {
-    switch(gameStatus) {
-      case 'loading':
-          return (
+  const gameScreen = (): ReactNode => {
+    switch (gameStatus) {
+      case "loading":
+        setAriaMessage("Game loading. Please wait.");
+        return (
           <SlideIn>
-             <LoadingScreen />
+            <LoadingScreen />
           </SlideIn>
         );
-      case 'active': 
-          return (
-            <SlideIn>
-              <GameBoard />
-            </SlideIn>
-          );
-      case 'over':
+      case "active":
+        setAriaMessage("Game started");
+        return (
+          <SlideIn>
+            <GameBoard />
+          </SlideIn>
+        );
+      case "over":
+        setAriaMessage("Game over");
         return (
           <SlideIn>
             <GameOver />
           </SlideIn>
         );
       default:
+        setAriaMessage("");
         return (
           <SlideIn>
             <StartGame />
           </SlideIn>
         );
     }
-  }
+  };
 
   return (
-  <main className="min-h-screen grid bg-stone overflow-clip">
-    <AriaLiveRegion>{message()}</AriaLiveRegion>
-    {gameScreen()}
-  </main>
-  )
-}
+    <ErrorBoundary fallbackRender={ErrorMsg}>
+      <main className="min-h-screen grid overflow-clip">
+        <AriaLiveRegion>{ariaMessage}</AriaLiveRegion>
+        {gameScreen()}
+      </main>
+    </ErrorBoundary>
+  );
+};
 
 export default Game;
