@@ -28,7 +28,7 @@ const GameBoard = ({ exitAnimation }: Props) => {
   }, [score]);
 
   return (
-    <div className="grid grid=cols-gameboard h-full">
+    <div className="grid grid-rows-gameboard h-full">
       <Slide appear={false} direction="down" in={!trigger}>
         <AppBar
           position="sticky"
@@ -42,7 +42,7 @@ const GameBoard = ({ exitAnimation }: Props) => {
               backdropFilter: "blur(5px)",
               color: "black",
               margin: "auto",
-              borderRadius: "3rem"
+              borderRadius: "3rem",
             },
           }}
         >
@@ -57,6 +57,24 @@ const GameBoard = ({ exitAnimation }: Props) => {
       <PauseOverlay isPaused={isPaused}>
         <Grid score={score} setScore={setScore} isPaused={isPaused} />
       </PauseOverlay>
+      <div className="flex items-center justify-center w-[18rem] gap-5 bg-black text-stone px-4 py-2 rounded-full sticky bottom-2">
+        <p className="m-0">{"Matches found: " + score}</p>
+        <div className="grow">
+          <LinearProgress
+            variant="determinate"
+            value={(score * 100) / (Math.pow(gridSize, 2) / 2)}
+            sx={{
+              height: "20px",
+              border: "1px solid #e6e1dd",
+              backgroundColor: "transparent",
+              borderRadius: "10px",
+              "& .MuiLinearProgress-bar": {
+                backgroundColor: "#e6e1dd",
+              },
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
