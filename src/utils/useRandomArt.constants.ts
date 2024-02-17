@@ -5,7 +5,7 @@ export const categories: {
   [key: string]: string[] | Array<{ title: string; id: string }>;
 } = {
   artist: [
-    "Vincent Van Gogh",
+    "Vincent van Gogh",
     "Paul Cezanne",
     "Edvard Munch",
     "Katsushika Hokusai",

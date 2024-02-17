@@ -1,21 +1,14 @@
-import { useContext, useEffect, useLayoutEffect, useRef } from "react";
-import ArtDetails from "./ArtDetails";
+import { useContext } from "react";
 import CountDown from "./CountDown";
 import { ArtContext } from "../contexts/artContext";
-import useSplitImage from "../hooks/useSplitImg";
 
 type Props = {
     exitAnimation?: () => void;
 }
 
 const LoadingScreen = ({ exitAnimation }: Props) => {
-    const artCards = useSplitImage();
-    const { setArtCards, category }  = useContext(ArtContext);
-    
-    useEffect(() => {
-        setArtCards(artCards)
-    }, [artCards])
-    
+    const { category }  = useContext(ArtContext);
+
     return (
         <div className="grid grid-rows-loading-screen h-full">
             <CountDown exitAnimation={exitAnimation} />

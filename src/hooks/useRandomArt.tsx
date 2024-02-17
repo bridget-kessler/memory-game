@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { IApiResponseModel, IArt } from "../types/types";
+import { IApiResponseModel, IArt, IArtCard } from "../types/types";
 import { LevelContext } from "../contexts/levelContext";
 import { GameContext } from "../contexts/gameContext";
 import { getRandomCategory } from "../utils/useRandomArt.constants";
@@ -7,21 +7,19 @@ import { fallbackData } from "../assets/data/fallbackData";
 
 const useRandomArt = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<null | {}>(null);
-  const [data, setData] = useState<[] | Array<IArt>>([]);
-  const [category, setCategory] = useState<null | {
+  const [isError, setIsError] = useState<null | { message: string }>(null);
+  const [data, setData] = useState<Array<IArt>>(fallbackData);
+  const [category, setCategory] = useState<{
     categoryType: string;
     title: string;
     id?: string;
-  }>(null);
+  }>({ categoryType: "artist", title: "Claude Monet" });
   const { gridSize } = useContext(LevelContext);
   const { gameStatus } = useContext(GameContext);
 
   const fetchRandomArt = async () => {
     try {
       if (!category) {
-        setCategory({ categoryType: "artist", title: "Vincent Van Gogh" })
-        setData(fallbackData);
         return;
       }
 
@@ -50,7 +48,11 @@ const useRandomArt = () => {
               {
                 term: { is_public_domain: true },
               },
-              query || "",
+              // require existence of an image
+              {
+                exists: { field: "thumbnail" },
+              },
+              query,
             ],
           },
         },
@@ -70,36 +72,40 @@ const useRandomArt = () => {
         const baseURL = `${result.config.iiif_url}/`;
         const { data } = result;
 
-        const artData = data.map((artwork: IApiResponseModel) => {
-            const {
-              image_id,
-              artist_display,
-              title,
-              date_display,
-              medium_display,
-              place_of_origin,
-              thumbnail: { width, height, lqip, alt_text },
-            } = artwork;
+        const artData = data.map((artwork: IApiResponseModel): IArt => {
+          const {
+            image_id,
+            artist_display,
+            title,
+            date_display,
+            medium_display,
+            place_of_origin,
+            thumbnail: { width, height, lqip, alt_text },
+          } = artwork;
 
-            return {
-              id: image_id,
-              img_url: baseURL + image_id + "/full/843,/0/default.jpg",
-              alt_text,
-              artist: artist_display,
-              title: title,
-              date: date_display,
-              medium: medium_display,
-              place_of_origin,
-              aspect_ratio: width / height,
-              lqip,
-            };
-          });
-          console.log({artData})
+          if (!image_id || !height || !lqip || !alt_text) {
+            throw new Error();
+          }
+
+          return {
+            id: image_id,
+            img_url: baseURL + image_id + "/full/843,/0/default.jpg",
+            alt_text,
+            artist: artist_display,
+            title: title,
+            date: date_display,
+            medium: medium_display,
+            place_of_origin,
+            aspect_ratio: width / height,
+            lqip,
+          };
+        });
         localStorage.setItem(category?.title, JSON.stringify(artData));
         setData(artData);
       }
-    } catch (err) {
-      setIsError({ msg: err });
+    } catch (e) {
+      let message = e instanceof Error ? e.message : "Unknown error";
+      setIsError({ message });
     }
     setIsLoading(false);
   };
@@ -110,24 +116,24 @@ const useRandomArt = () => {
     }
     if (category && gameStatus === "loading") {
       setIsLoading(true);
+      
+      if (category.title === "Claude Monet") {
+        setIsLoading(false);
+        return;
+      }
       const cachedData = localStorage.getItem(category.title);
 
       if (!cachedData) {
-        console.log("no cached data")
         fetchRandomArt();
-      }  
+      }
 
       // Check if data exists
       if (typeof cachedData === "string") {
         const parsedData = JSON.parse(cachedData);
 
         if (parsedData.length < Math.pow(gridSize, 2) / 2) {
-          console.log({parsedData: parsedData.length, uniqueCards: Math.pow(gridSize, 2) / 2}, "not enough data")
-
           fetchRandomArt();
         } else {
-          console.log("cached data", { data: JSON.parse(cachedData) })
-
           setData(JSON.parse(cachedData));
           setIsLoading(false);
         }

@@ -9,16 +9,10 @@ const useLQIP = (imgSrc: string | undefined, lqip: string | undefined, width: nu
             const img = new Image();
             img.src = imgSrc;
             img.width = width;
-            if (aspect_ratio) {
-                img.height = width / aspect_ratio;
-            }
             img.crossOrigin = "anonymous";
 
             img.onload = function() {
                 setIsLoaded(true);
-            }
-            img.onerror = (e) => {
-                console.log({ error: e})
             }
         }
     }, [imgSrc])

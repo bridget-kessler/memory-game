@@ -5,6 +5,7 @@ export interface IArtCard {
 }
 
 export interface IApiResponseModel {
+  is_public_domain: boolean;
   image_id: string;
   artist_display: string;
   title: string;
@@ -28,7 +29,7 @@ export interface IArt {
   date: string;
   medium: string;
   place_of_origin: string;
-  aspect_ratio?: number;
+  aspect_ratio: number;
   lqip: string;
 }
 

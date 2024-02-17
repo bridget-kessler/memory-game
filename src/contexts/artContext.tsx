@@ -3,16 +3,18 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useContext,
   useEffect,
   useState,
 } from "react";
-import FallbackImg from "../assets/images/the_bedroom.jpg";
 import { IArt, IArtCard } from "../types/types";
 import useRandomArt from "../hooks/useRandomArt";
-import uniqid from "uniqid";
-import shuffleArray from "../utils/shuffleArray";
-import createArtCard from "../utils/createArtCard";
 import { fallbackData } from "../assets/data/fallbackData";
+import { LevelContext } from "./levelContext";
+import { GameContext } from "./gameContext";
+import createArtCard from "../utils/createArtCard";
+import shuffleArray from "../utils/shuffleArray";
+import createDeck from "../utils/createDeck";
 
 type Props = {
   children: ReactNode;
@@ -31,10 +33,23 @@ export const ArtContext = createContext<ArtContextType>({} as ArtContextType);
 // it can be useful when testing components in isolation when they're not wrapped with a provider
 
 export const ArtContextProvider = ({ children }: Props) => {
+  const { gridSize } = useContext(LevelContext);
+  const { gameStatus } = useContext(GameContext);
   const { category, data, isLoading, isError } = useRandomArt();
   const [artCards, setArtCards] = useState<Array<IArtCard>>(
     [] as Array<IArtCard>
   );
+
+  useEffect(() => {
+    if (data && gameStatus === "loading") {
+      console.log("use effect game loading", { data });
+      createDeck(data, gridSize)
+        .then((res) => {
+          setArtCards(res)
+          console.log({ res })})
+        .catch((err) => console.log({ err }));
+    }
+  }, [isLoading]);
 
   return (
     <ArtContext.Provider
@@ -43,7 +58,7 @@ export const ArtContextProvider = ({ children }: Props) => {
         art: data || fallbackData,
         category: category?.title,
         artCards,
-        setArtCards
+        setArtCards,
       }}
     >
       {children}
