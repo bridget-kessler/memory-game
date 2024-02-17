@@ -1,9 +1,12 @@
-import { useContext } from "react";
 import SlideIn from "./SlideIn";
 import { RiErrorWarningFill } from "react-icons/ri";
-import { useErrorBoundary } from "react-error-boundary";
 
-const ErrorMsg = ({ error, resetErrorBoundary }) => {
+type Props = {
+    error: Error,
+    resetErrorBoundary: () => void;
+}
+
+const ErrorMsg = ({ error, resetErrorBoundary }: Props) => {
 
   return (
     <div className="min-h-screen grid overflow-clip">

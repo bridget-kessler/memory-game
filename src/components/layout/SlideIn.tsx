@@ -32,7 +32,7 @@ const SlideIn = ({ children }: Props) => {
     }
 
     return (
-        <div className="m-10" ref={ref}>
+        <div className="p-5" ref={ref}>
             {cloneElement(children, {exitAnimation: exitAnimation})}
         </div>
     )

@@ -1,19 +1,12 @@
 import {
-  useRef,
-  useLayoutEffect,
   useState,
-  Fragment,
   useContext,
   FormEvent,
 } from "react";
-import { gsap } from "gsap";
 import { levels, levelsArray, tLevelsKey, tLevelsValue } from "../types/types";
 import { LevelContext } from "../contexts/levelContext";
 import {
-  Button,
-  FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";

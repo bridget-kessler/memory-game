@@ -57,7 +57,7 @@ const GameBoard = ({ exitAnimation }: Props) => {
       <PauseOverlay isPaused={isPaused}>
         <Grid score={score} setScore={setScore} isPaused={isPaused} />
       </PauseOverlay>
-      <div className="flex items-center justify-center w-[18rem] gap-5 bg-black text-stone px-4 py-2 rounded-full sticky bottom-2">
+      <div className="m-auto flex items-center justify-center w-[18rem] gap-5 bg-black text-stone px-4 py-2 rounded-full sticky bottom-2">
         <p className="m-0">{"Matches found: " + score}</p>
         <div className="grow">
           <LinearProgress

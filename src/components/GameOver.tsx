@@ -15,7 +15,7 @@ type Props = {
 const GameOver = ({ exitAnimation }: Props) => {
   const { transitionGame, bestTime } = useContext(GameContext);
   const { difficulty } = useContext(LevelContext);
-  const { artCards, category } = useContext(ArtContext);
+  const { artCards, category, art } = useContext(ArtContext);
   const [open, setOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<string>("");
 
@@ -38,7 +38,7 @@ const GameOver = ({ exitAnimation }: Props) => {
           },
         }}
       >
-        <button className="flex items-center gap-2" onClick={() => setOpen(false)}>
+        <button className="flex items-center gap-2 w-fit" onClick={() => setOpen(false)}>
           <CgClose />
           Close
         </button>
@@ -60,6 +60,7 @@ const GameOver = ({ exitAnimation }: Props) => {
             return (
               <button
                 key={artCard.key}
+                aria-label={art?.filter(el => el.title === artCard.id)[0].alt_text}
                 aria-pressed={open && selectedArt === artCard.id}
                 className="w-full h-full rounded-md overflow-hidden"
                 onClick={() => {
