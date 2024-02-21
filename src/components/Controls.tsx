@@ -3,9 +3,9 @@ import Stopwatch from "./Stopwatch";
 import { GiPauseButton } from "react-icons/gi";
 import { FaUndoAlt } from "react-icons/fa";
 import { IoPlay } from "react-icons/io5";
-import { GameContext } from "../contexts/gameContext";
+import { GameContext } from "../contexts/GameContext";
 import { Tooltip, TooltipProps, tooltipClasses } from "@mui/material";
-import { LevelContext } from "../contexts/levelContext";
+import { LevelContext } from "../contexts/LevelContext";
 import {styled} from "@mui/system";
 
 type Props = {

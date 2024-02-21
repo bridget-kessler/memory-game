@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import StartGame from "../StartGame";
 import { useContext } from "react";
-import { GameContext } from "../../contexts/gameContext";
-import LoadingScreen from "../LoadingScreen";
+import { GameContext } from "../../contexts/GameContext";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import SlideIn from "../layout/SlideIn";
 import GameBoard from "../Gameboard";
 import GameOver from "../GameOver";
@@ -12,7 +12,6 @@ import ErrorMsg from "../layout/ErrorMsg";
 
 const Game = () => {
   const { gameStatus } = useContext(GameContext);
-  
 
   const message = () => {
       switch(gameStatus) {
@@ -29,7 +28,7 @@ const Game = () => {
                   <>Gameover</>
               );
           default:
-              return "Game start";
+              return "";
       }
   }
 

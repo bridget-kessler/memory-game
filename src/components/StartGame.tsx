@@ -1,24 +1,16 @@
-import {
-  useState,
-  useContext,
-  FormEvent,
-} from "react";
-import { levels, levelsArray, tLevelsKey, tLevelsValue } from "../types/types";
-import { LevelContext } from "../contexts/levelContext";
-import {
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
-import { GameContext } from "../contexts/gameContext";
+import { useState, FormEvent } from "react";
+import { levels, levelsArray, tLevelsKey } from "../types/types";
+import { useLevelContext } from "../contexts/LevelContext";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { useGameContext } from "../contexts/GameContext";
 
 type Props = {
   exitAnimation?: () => void;
 };
 
 const StartGame = ({ exitAnimation }: Props) => {
-  const { setLevel } = useContext(LevelContext);
-  const { transitionGame } = useContext(GameContext);
+  const { setLevel } = useLevelContext();
+  const { transitionGame } = useGameContext();
   const [selectedLevel, setSelectedLevel] = useState<tLevelsKey>("easy");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +49,15 @@ const StartGame = ({ exitAnimation }: Props) => {
                   value={level[0]}
                   checked={selectedLevel === level[0] ? true : false}
                   onChange={() => setSelectedLevel(level[0])}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        "&.Mui-checked": {
+                          color: "rgb(56,139,218)",
+                        },
+                      }}
+                    />
+                  }
                   label={
                     level[0].substring(0, 1).toUpperCase() +
                     level[0].substring(1)

@@ -1,11 +1,9 @@
 import {
-  Dispatch,
   ReactNode,
-  SetStateAction,
   createContext,
+  useContext,
   useState,
 } from "react";
-import { tBestTimes, tLevelsKey } from "../types/types";
 
 type Props = {
   children: ReactNode;
@@ -14,29 +12,16 @@ type Props = {
 type GameContextType = {
   gameStatus: string;
   transitionGame: (newStatus: "start" | "loading" | "active" | "over") => void;
-  setBestTime: Dispatch<
-    SetStateAction<{
-      [key in tLevelsKey]: number;
-    }>
-  >;
-  bestTime: {
-    [key in tLevelsKey]: number;
-  };
 };
 
-export const GameContext = createContext<GameContextType>(
+const GameContext = createContext<GameContextType>(
   {} as GameContextType
 );
 
-export const GameContextProvider = ({ children }: Props) => {
+const GameContextProvider = ({ children }: Props) => {
   const [gameStatus, setGameStatus] = useState<
     "start" | "loading" | "active" | "over"
   >("start");
-  const [bestTime, setBestTime] = useState<tBestTimes>({
-    easy: Infinity,
-    medium: Infinity,
-    hard: Infinity,
-  });
 
   const transitionGame = (
     newStatus: "start" | "loading" | "active" | "over"
@@ -46,11 +31,26 @@ export const GameContextProvider = ({ children }: Props) => {
     }, 1000);
   };
 
+
   return (
     <GameContext.Provider
-      value={{ gameStatus, transitionGame, bestTime, setBestTime }}
+      value={{
+        gameStatus,
+        transitionGame
+      }}
     >
       {children}
     </GameContext.Provider>
   );
 };
+
+const useGameContext = () => {
+  const context = useContext(GameContext);
+
+  if (context === undefined) {
+    throw new Error("useGameContext must be used within a GameContextProvider");
+  }
+  return context;
+};
+
+export { GameContextProvider, useGameContext, GameContext };

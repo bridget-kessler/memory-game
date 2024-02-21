@@ -10,10 +10,8 @@ import {
 import { IArt, IArtCard } from "../types/types";
 import useRandomArt from "../hooks/useRandomArt";
 import { fallbackData } from "../assets/data/fallbackData";
-import { LevelContext } from "./levelContext";
-import { GameContext } from "./gameContext";
-import createArtCard from "../utils/createArtCard";
-import shuffleArray from "../utils/shuffleArray";
+import { useLevelContext } from "./LevelContext";
+import { useGameContext } from "./GameContext";
 import createDeck from "../utils/createDeck";
 
 type Props = {
@@ -28,26 +26,20 @@ type ArtContextType = {
   setArtCards: Dispatch<SetStateAction<IArtCard[]>>;
 };
 
-export const ArtContext = createContext<ArtContextType>({} as ArtContextType);
+const ArtContext = createContext<ArtContextType>({} as ArtContextType);
 // defaultValue argument of createContext is only used when there is no matching provider above it in the tree
 // it can be useful when testing components in isolation when they're not wrapped with a provider
 
-export const ArtContextProvider = ({ children }: Props) => {
-  const { gridSize } = useContext(LevelContext);
-  const { gameStatus } = useContext(GameContext);
-  const { category, data, isLoading, isError } = useRandomArt();
+const ArtContextProvider = ({ children }: Props) => {
+  const { gridSize } = useLevelContext();
+  const { category, data, isLoading } = useRandomArt();
   const [artCards, setArtCards] = useState<Array<IArtCard>>(
     [] as Array<IArtCard>
   );
 
   useEffect(() => {
-    if (data && gameStatus === "loading") {
-      console.log("use effect game loading", { data });
-      createDeck(data, gridSize)
-        .then((res) => {
-          setArtCards(res)
-          console.log({ res })})
-        .catch((err) => console.log({ err }));
+    if (!isLoading && data) {
+      createDeck(data, gridSize).then((res) => setArtCards(res.slice(0, Math.pow(gridSize, 2) / 2)));
     }
   }, [isLoading]);
 
@@ -65,3 +57,14 @@ export const ArtContextProvider = ({ children }: Props) => {
     </ArtContext.Provider>
   );
 };
+
+const useArtContext = () => {
+  const context = useContext(ArtContext);
+
+  if (context === undefined) {
+    throw new Error("useArtContext must be used within a ArtContextProvider");
+  }
+  return context;
+};
+
+export { ArtContextProvider, useArtContext, ArtContext };

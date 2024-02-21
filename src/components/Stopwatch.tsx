@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { GameContext } from "../contexts/gameContext";
-import { levels, levelsArray } from "../types/types";
-import { LevelContext } from "../contexts/levelContext";
+import { useEffect, useState } from "react";
+import { useLevelContext } from "../contexts/LevelContext";
 import formatTime from "../utils/formatTime";
 
 type Props = {
@@ -10,8 +8,7 @@ type Props = {
 };
 
 const Stopwatch = ({ isPaused, score }: Props) => {
-  const { setBestTime, bestTime } = useContext(GameContext);
-  const { gridSize, difficulty } = useContext(LevelContext);
+  const { setTimeElapsed, gridSize } = useLevelContext();
   const [time, setTime] = useState(0);
   let minutes = Math.floor(time / 60000)
     .toString()
@@ -40,9 +37,7 @@ const Stopwatch = ({ isPaused, score }: Props) => {
 
   useEffect(() => {
     if (Math.pow(gridSize, 2) / 2 === score) {
-        if ( time < bestTime[difficulty]) {
-            setBestTime({ ...bestTime, [difficulty]: time });
-        }
+        setTimeElapsed(time)
     }
   }, [score]);
 

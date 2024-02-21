@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import { ReactElement, ReactNode, cloneElement, useContext, useEffect, useLayoutEffect, useRef } from "react"
-import { GameContext } from "../../contexts/gameContext";
+import { GameContext } from "../../contexts/GameContext";
 
 type Props = {
     children: ReactElement

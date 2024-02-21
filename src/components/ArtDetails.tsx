@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { ArtContext } from "../contexts/artContext";
+import { useArtContext } from "../contexts/ArtContext";
 import { capitalize } from "@mui/material";
 import useLQIP from "../hooks/useLQIP";
 
@@ -8,7 +7,7 @@ type Props = {
 };
 
 const ArtDetails = ({ selectedArtId }: Props) => {
-  const { art,  } = useContext(ArtContext);
+  const { art  } = useArtContext();
   const selectedArt = art?.filter((el) => el.title === selectedArtId)[0];
   const { src, isBlurred } = useLQIP(
     selectedArt?.img_url,

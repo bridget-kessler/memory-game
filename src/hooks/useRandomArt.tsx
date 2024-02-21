@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { IApiResponseModel, IArt, IArtCard } from "../types/types";
-import { LevelContext } from "../contexts/levelContext";
-import { GameContext } from "../contexts/gameContext";
+import { useEffect, useState } from "react";
+import { IApiResponseModel, IArt } from "../types/types";
+import { useLevelContext } from "../contexts/LevelContext";
+import { useGameContext } from "../contexts/GameContext";
 import { getRandomCategory } from "../utils/useRandomArt.constants";
 import { fallbackData } from "../assets/data/fallbackData";
 
@@ -14,15 +14,14 @@ const useRandomArt = () => {
     title: string;
     id?: string;
   }>({ categoryType: "artist", title: "Claude Monet" });
-  const { gridSize } = useContext(LevelContext);
-  const { gameStatus } = useContext(GameContext);
+  const { gridSize } = useLevelContext();
+  const { gameStatus } = useGameContext();
 
   const fetchRandomArt = async () => {
     try {
       if (!category) {
         return;
       }
-
       let query: {
         term?: { [key: string]: string };
         match?: {};
@@ -66,11 +65,15 @@ const useRandomArt = () => {
 
       const promise = await fetch(url);
       if (promise.status >= 400) {
-        throw new Error("Error");
+        throw new Error();
       } else {
         const result = await promise.json();
         const baseURL = `${result.config.iiif_url}/`;
         const { data } = result;
+
+        if (data?.length < (Math.pow(gridSize, 2) / 2)) {
+          throw new Error()
+        }
 
         const artData = data.map((artwork: IApiResponseModel): IArt => {
           const {
@@ -104,6 +107,8 @@ const useRandomArt = () => {
         setData(artData);
       }
     } catch (e) {
+      setCategory({ categoryType: "artist", title: "Claude Monet"})
+      setData(fallbackData)
       let message = e instanceof Error ? e.message : "Unknown error";
       setIsError({ message });
     }
@@ -112,30 +117,30 @@ const useRandomArt = () => {
 
   useEffect(() => {
     if (gameStatus === "start") {
-      setCategory(getRandomCategory());
+      setCategory(getRandomCategory())
+      setIsLoading(true)
     }
-    if (category && gameStatus === "loading") {
-      setIsLoading(true);
-      
+    if (gameStatus === "loading") {
       if (category.title === "Claude Monet") {
-        setIsLoading(false);
-        return;
-      }
-      const cachedData = localStorage.getItem(category.title);
+        setData(fallbackData)
+        setIsLoading(false)
+      } else {
 
-      if (!cachedData) {
-        fetchRandomArt();
-      }
-
-      // Check if data exists
-      if (typeof cachedData === "string") {
-        const parsedData = JSON.parse(cachedData);
-
-        if (parsedData.length < Math.pow(gridSize, 2) / 2) {
+        const cachedData = localStorage.getItem(category.title);
+  
+        if (!cachedData) {
           fetchRandomArt();
-        } else {
-          setData(JSON.parse(cachedData));
-          setIsLoading(false);
+        }
+  
+        if (typeof cachedData === "string") {
+          const parsedData = JSON.parse(cachedData);
+  
+          if (parsedData.length < Math.pow(gridSize, 2) / 2) {
+            fetchRandomArt();
+          } else {
+            setData(JSON.parse(cachedData));
+            setIsLoading(false)
+          }
         }
       }
     }

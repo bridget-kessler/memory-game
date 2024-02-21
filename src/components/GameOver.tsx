@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { GameContext } from "../contexts/gameContext";
-import { LevelContext } from "../contexts/levelContext";
+import { useState } from "react";
+import { useGameContext } from "../contexts/GameContext";
+import { useLevelContext } from "../contexts/LevelContext";
 import { SwipeableDrawer } from "@mui/material";
 import ArtDetails from "./ArtDetails";
-import { ArtContext } from "../contexts/artContext";
+import { useArtContext } from "../contexts/ArtContext";
 import { IArtCard } from "../types/types";
 import { CgClose } from "react-icons/cg";
 import formatTime from "../utils/formatTime";
@@ -13,9 +13,9 @@ type Props = {
 };
 
 const GameOver = ({ exitAnimation }: Props) => {
-  const { transitionGame } = useContext(GameContext);
-  const { timeElapsed, newRecord } = useContext(LevelContext);
-  const { artCards, category, art } = useContext(ArtContext);
+  const { transitionGame } = useGameContext();
+  const { timeElapsed, newRecord } = useLevelContext();
+  const { artCards, category } = useArtContext();
   const [open, setOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<string>("");
 

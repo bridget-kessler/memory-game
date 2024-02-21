@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 import Game from "./Game";
-import { GameContext } from "../../contexts/gameContext";
+import { GameContext } from "../../contexts/GameContext";
 
 describe("Game", () => {
 
@@ -16,12 +16,12 @@ describe("Game", () => {
         value={{
           gameStatus: "start",
           transitionGame: vi.fn(),
-          bestTime: {
-            easy: Infinity,
-            medium: Infinity,
-            hard: Infinity
-          },
-          setBestTime: vi.fn(),
+          // bestTime: {
+          //   easy: Infinity,
+          //   medium: Infinity,
+          //   hard: Infinity
+          // },
+          // setBestTime: vi.fn(),
         }}
       >
         <Game />

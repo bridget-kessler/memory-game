@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useContext } from 'react';
-import { GameContext } from '../contexts/gameContext';
+import { GameContext } from '../contexts/GameContext';
 
 type Props = {
     exitAnimation?: () => void;

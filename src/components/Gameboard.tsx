@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import Grid from "./Grid";
+import { useEffect, useState } from "react";
+import Grid from "./Grid/Grid";
 import Controls from "./Controls";
 import PauseOverlay from "./layout/PauseOverlay";
-import { LevelContext } from "../contexts/levelContext";
+import { useLevelContext } from "../contexts/LevelContext";
 import { AppBar, LinearProgress, Slide } from "@mui/material";
-import { GameContext } from "../contexts/gameContext";
+import { useGameContext } from "../contexts/GameContext";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 type Props = {
@@ -12,9 +12,9 @@ type Props = {
 };
 
 const GameBoard = ({ exitAnimation }: Props) => {
-  const trigger = useScrollTrigger();
-  const { gridSize } = useContext(LevelContext);
-  const { transitionGame } = useContext(GameContext);
+  const trigger = useScrollTrigger(); // AppBar will be hidden when scrolling down on mobile
+  const { gridSize } = useLevelContext();
+  const { transitionGame } = useGameContext();
   const [isPaused, setIsPaused] = useState(false);
   const [score, setScore] = useState(0);
 
