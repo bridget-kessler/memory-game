@@ -2,7 +2,8 @@
 const plugin = require('tailwindcss/plugin')
 const colors = require('@mui/material/colors'); // for mui v4
 
-const backfaceVisibility = plugin(function({addUtilities}) {
+// Register static utility styles for backface visibility
+const backfaceVisibility = plugin( ({addUtilities}) => {
   addUtilities({
     '.backface-visible': {
       'backface-visibility': 'visible',
@@ -45,11 +46,6 @@ module.exports = {
       },
       colors: {
         'stone': '#e6e1dd',
-        // primary: {
-        //   light: '#BAA333',
-        //   main: '#BAA333',
-        //   dark: '#BAA333',
-        // },
       }
     },
   },
