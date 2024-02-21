@@ -13,8 +13,8 @@ type Props = {
 };
 
 const GameOver = ({ exitAnimation }: Props) => {
-  const { transitionGame, bestTime } = useContext(GameContext);
-  const { difficulty } = useContext(LevelContext);
+  const { transitionGame } = useContext(GameContext);
+  const { timeElapsed, newRecord } = useContext(LevelContext);
   const { artCards, category, art } = useContext(ArtContext);
   const [open, setOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<string>("");
@@ -38,7 +38,10 @@ const GameOver = ({ exitAnimation }: Props) => {
           },
         }}
       >
-        <button className="flex items-center gap-2 w-fit" onClick={() => setOpen(false)}>
+        <button
+          className="flex items-center gap-2 w-fit"
+          onClick={() => setOpen(false)}
+        >
           <CgClose />
           Close
         </button>
@@ -47,7 +50,16 @@ const GameOver = ({ exitAnimation }: Props) => {
       <div className="max-w-[27rem] mx-auto">
         <h1>Game Over</h1>
         <p>Category: {category}</p>
-        <p >Time elapsed: {formatTime(bestTime[difficulty])}</p>
+        <p>
+          {newRecord ? (
+            <span className="bg-[rgb(56,139,218)] text-stone text-sm rounded-md py-1 px-2 mr-2">
+              New Record
+            </span>
+          ) : (
+            ""
+          )}
+          Time elapsed: {formatTime(timeElapsed)}
+        </p>
         <h2>Cards From This Round</h2>
         <p>
           Each card includes a close up of a famous work of art. Click on the
@@ -60,7 +72,7 @@ const GameOver = ({ exitAnimation }: Props) => {
             return (
               <button
                 key={artCard.key}
-                aria-label={art?.filter(el => el.title === artCard.id)[0].alt_text}
+                aria-label={artCard.id}
                 aria-pressed={open && selectedArt === artCard.id}
                 className="w-full h-full rounded-md overflow-hidden"
                 onClick={() => {
@@ -74,12 +86,12 @@ const GameOver = ({ exitAnimation }: Props) => {
           })}
         </div>
         <button
-          onClick={() =>{
-            transitionGame("start")
+          onClick={() => {
+            transitionGame("start");
             if (exitAnimation) {
-                exitAnimation()
+              exitAnimation();
             }
-          } }
+          }}
           className="bg-black text-white px-3 py-1 rounded-full mt-5"
         >
           Play Again

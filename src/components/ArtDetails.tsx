@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { ArtContext } from "../contexts/artContext";
 import { capitalize } from "@mui/material";
 import useLQIP from "../hooks/useLQIP";
@@ -23,17 +23,14 @@ const ArtDetails = ({ selectedArtId }: Props) => {
         <h1 className="mb-5">{selectedArt.title}</h1>
         <figure
           className="overflow-hidden pb-10"
-          style={{
-            aspectRatio: selectedArt.aspect_ratio,
-          }}
         >
           <img
             className="rounded-sm object-cover h-full w-full"
             crossOrigin="anonymous"
             width={"748px"}
-            height={"100%"}
             src={src}
             style={{
+              aspectRatio: selectedArt.aspect_ratio,
               transform: isBlurred ? "scale(1.3)" : "",
               filter: isBlurred ? "blur(18px)" : "",
             }}
