@@ -77,6 +77,7 @@ const useRandomArt = () => {
 
         const artData = data.map((artwork: IApiResponseModel): IArt => {
           const {
+            is_public_domain,
             image_id,
             artist_display,
             title,
@@ -86,7 +87,7 @@ const useRandomArt = () => {
             thumbnail: { width, height, lqip, alt_text },
           } = artwork;
 
-          if (!image_id || !height || !lqip || !alt_text) {
+          if (!is_public_domain || !image_id || !height || !lqip || !alt_text) {
             throw new Error();
           }
 
