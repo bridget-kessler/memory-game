@@ -61,5 +61,5 @@ type tLevelsArray = Entries<tLevels>
 export const levelsArray = Object.entries(levels) as tLevelsArray;
 
 export type tBestTimes = {
-  [key in tLevelsKey]: number
+  [key in tLevelsKey]: number;
 }

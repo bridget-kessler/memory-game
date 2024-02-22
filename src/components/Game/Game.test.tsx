@@ -16,12 +16,6 @@ describe("Game", () => {
         value={{
           gameStatus: "start",
           transitionGame: vi.fn(),
-          // bestTime: {
-          //   easy: Infinity,
-          //   medium: Infinity,
-          //   hard: Infinity
-          // },
-          // setBestTime: vi.fn(),
         }}
       >
         <Game />

@@ -1,16 +1,15 @@
 import {
   Dispatch,
   SetStateAction,
-  useContext,
   useEffect,
   useState,
 } from "react";
-import { ArtContext } from "../contexts/artContext";
-import { LevelContext } from "../contexts/levelContext";
-import AriaLiveRegion from "./layout/AriaLiveRegion";
-import shuffleArray from "../utils/shuffleArray";
+import { useArtContext } from "../../contexts/ArtContext";
+import { useLevelContext } from "../../contexts/LevelContext";
+import AriaLiveRegion from "../layout/AriaLiveRegion";
+import shuffleArray from "../../utils/shuffleArray";
 import uniqid from "uniqid";
-import { IArtCard } from "../types/types";
+import { IArtCard } from "../../types/types";
 
 type Props = {
   score: number;
@@ -19,8 +18,8 @@ type Props = {
 };
 
 const Grid = ({ score, setScore, isPaused }: Props) => {
-  const { gridSize } = useContext(LevelContext);
-  const { artCards } = useContext(ArtContext);
+  const { gridSize } = useLevelContext();
+  const { artCards } = useArtContext();
   const [cardDeck, setCardDeck] = useState<Array<IArtCard>>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [targetIds, setTargetIds] = useState<string[]>([]);
@@ -64,6 +63,7 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
     <>
       <AriaLiveRegion>{ariaMessage}</AriaLiveRegion>
       <div
+        data-testid="grid"
         className={`grid w-full m-auto gap-4 max-w-full justify-center grid-rows-cards grid-cols-cards`}
         style={{
           maxWidth: `${gridSize * 6 + gridSize - 1}rem`,
@@ -72,7 +72,8 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
         {cardDeck?.map((artCard: IArtCard, i) => {
           return (
             <button
-              aria-description={
+              data-testid={'button'}
+              aria-label={
                 selected.includes(artCard.key)
                   ? `Card ${i + 1} value is ${artCard.id}`
                   : `Flip Card ${i + 1}`
