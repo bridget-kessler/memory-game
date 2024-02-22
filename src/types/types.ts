@@ -1,6 +1,7 @@
 export interface IArtCard {
   key: string;
   id: string;
+  title: string,
   img: string;
 }
 

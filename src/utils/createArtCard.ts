@@ -30,59 +30,12 @@ const createArtCard = async (art: IArt): Promise<IArtCard> => {
   const url = await canvas.toDataURL("image/jpeg", 0.7);
 
   return {
-    id: art?.title,
+    id: art.id,
+    title: art.title,
     key: uniqid(),
     img: url,
   };
 
-  // const result: Promise<IArtCard> = new Promise((resolve, reject) => {
-  //     img.onload = function(){
-  //         /*  drawImage(
-  //             image: the source img,
-  //             sx: x-axis coordinate of the top-left corner of source img,
-  //             sy: y-axis coordinate of the top-left corner of source img,
-  //             sWidth: width of the subrect of the source img,
-  //             sHeight: height of the subrect of the source img,,
-  //             dx: x-axis coordinate of the top-left corner of destination canvas,
-  //             dy: y-axis coordinate of the top-left corner of destination canvas,
-  //             dWidth: width of destination canvas,
-  //             dHeight: height of destination canvas
-  //         )
-  //         */
-
-  //         // Math.floor(Math.random() * (843 - 120)) length - 120
-  //         ctx?.drawImage(
-  //             img,
-  //             Math.floor(Math.random() * (843 - 120)),
-  //             imgHeight ? Math.floor(Math.random() * (imgHeight - 120)) : 0,
-  //             120,
-  //             120,
-  //             0,
-  //             0,
-  //             canvas.width,
-  //             canvas.height
-  //         );
-
-  //         artCard.img = canvas.toDataURL("image/jpeg", 0.7);
-  //         resolve(artCard)
-  //     }
-  // })
-  //   img.onload((e) => {
-  //     ctx?.drawImage(
-  //       img,
-  //       Math.floor(Math.random() * (843 - 120)),
-  //       imgHeight ? Math.floor(Math.random() * (imgHeight - 120)) : 0,
-  //       120,
-  //       120,
-  //       0,
-  //       0,
-  //       canvas.width,
-  //       canvas.height
-  //     );
-
-  //     artCard.img = canvas.toDataURL("image/jpeg", 0.7);
-  //   });
-  //   return result;
 };
 
 const loadImage = (src: string): Promise<HTMLImageElement> => {

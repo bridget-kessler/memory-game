@@ -1,9 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useArtContext } from "../../contexts/ArtContext";
 import { useLevelContext } from "../../contexts/LevelContext";
 import AriaLiveRegion from "../layout/AriaLiveRegion";
@@ -20,10 +15,9 @@ type Props = {
 const Grid = ({ score, setScore, isPaused }: Props) => {
   const { gridSize } = useLevelContext();
   const { artCards } = useArtContext();
-  const [cardDeck, setCardDeck] = useState<Array<IArtCard>>([]);
+  const [cardDeck, setCardDeck] = useState<IArtCard[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [targetIds, setTargetIds] = useState<string[]>([]);
-  const [boardIsDisabled, setBoardIsDisabled] = useState(false);
   const [matches, setMatches] = useState<string[]>([]);
   const [ariaMessage, setAriaMessage] = useState("");
 
@@ -38,19 +32,17 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
   }, [artCards?.length]);
 
   useEffect(() => {
-    setAriaMessage("");
+    if (targetIds.length === 1) {
+      setAriaMessage("");
+    }
     if (targetIds.length === 2) {
-      // Disable board until all cards are face down again
-      setBoardIsDisabled(true);
-
       setAriaMessage(
         targetIds[0] === targetIds[1] ? "Match Found" : "No Match Found"
       );
 
       setTimeout(() => {
-        setSelected((prev) => []);
-        setTargetIds((prev) => []);
-        setBoardIsDisabled(false);
+        setSelected([]);
+        setTargetIds([]);
         if (targetIds[0] === targetIds[1]) {
           setMatches((prev) => [...matches, targetIds[0]]);
           setScore(score + 1);
@@ -72,10 +64,10 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
         {cardDeck?.map((artCard: IArtCard, i) => {
           return (
             <button
-              data-testid={'button'}
+              data-testid={"button"}
               aria-label={
                 selected.includes(artCard.key)
-                  ? `Card ${i + 1} value is ${artCard.id}`
+                  ? `Card ${i + 1} value is ${artCard.title}`
                   : `Flip Card ${i + 1}`
               }
               key={artCard.key}
@@ -85,8 +77,7 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
                 cursor:
                   matches.includes(artCard.id) ||
                   selected.includes(artCard.key) ||
-                  isPaused ||
-                  boardIsDisabled
+                  isPaused || selected.length === 2 || matches.includes(artCard.id)
                     ? "default"
                     : "pointer",
                 opacity: matches.includes(artCard.id) ? 0 : 1,
@@ -95,15 +86,16 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
                 if (!selected.includes(artCard.key)) {
                   setTargetIds([...targetIds, artCard.id]);
                   setSelected([...selected, artCard.key]);
-                } else {
-                  console.log("can't flip card that is already selected");
                 }
               }}
+              // Announce as pressed only if one card is selected
+              aria-pressed={selected.length === 1 && selected.includes(artCard.key) ? true : false}
               // 'Aria-disabled' is the same semantically as 'disabled' but does not prevent focus and click events
-              // If a card is selected, it should still be focusable and discoverable, but it should also be clear that flipping the same card twice in a row isn't allowed
-              aria-disabled={selected.includes(artCard.key)}
+              // If only one card is selected, keep if focusable so title is read but announce that toggle is disabled
+              aria-disabled={selected.length === 1 && selected.includes(artCard.key)}
+              // prevent any interaction a) with face down cards while any two cards are face up or b) when game is paused
               disabled={
-                isPaused || boardIsDisabled || matches.includes(artCard.id)
+                isPaused || (selected.length === 2 && !selected.includes(artCard.key)) || matches.includes(artCard.id)
               }
             >
               {

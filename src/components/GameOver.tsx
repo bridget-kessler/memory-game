@@ -72,7 +72,7 @@ const GameOver = ({ exitAnimation }: Props) => {
             return (
               <button
                 key={artCard.key}
-                aria-label={artCard.id}
+                aria-label={artCard.title}
                 aria-pressed={open && selectedArt === artCard.id}
                 className="w-full h-full rounded-md overflow-hidden"
                 onClick={() => {

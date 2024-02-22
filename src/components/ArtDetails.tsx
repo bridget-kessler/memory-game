@@ -8,7 +8,7 @@ type Props = {
 
 const ArtDetails = ({ selectedArtId }: Props) => {
   const { art  } = useArtContext();
-  const selectedArt = art?.filter((el) => el.title === selectedArtId)[0];
+  const selectedArt = art?.filter((el) => el.id === selectedArtId)[0];
   const { src, isBlurred } = useLQIP(
     selectedArt?.img_url,
     selectedArt?.lqip,
