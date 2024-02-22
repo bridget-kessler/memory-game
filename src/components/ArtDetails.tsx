@@ -48,7 +48,7 @@ const ArtDetails = ({ selectedArtId }: Props) => {
                 // white-space pre-line treats white space as a new line
                 <p
                   key={i}
-                  className="py-2 last:border-b-0 border-b border-black whitespace-pre-line"
+                  className="py-2 border-b border-black whitespace-pre-line"
                 >
                   <span className="text-neutral-500">
                     {capitalize(item[0].replaceAll("_", " "))}:{" "}
@@ -57,6 +57,7 @@ const ArtDetails = ({ selectedArtId }: Props) => {
                 </p>
               );
             })}
+            <p className="py-2 whitespace-pre-line">The Art Institute of Chicago</p>
         </>
       </div>
     );

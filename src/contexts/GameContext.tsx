@@ -1,9 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -14,9 +9,7 @@ type GameContextType = {
   transitionGame: (newStatus: "start" | "loading" | "active" | "over") => void;
 };
 
-const GameContext = createContext<GameContextType>(
-  {} as GameContextType
-);
+const GameContext = createContext<GameContextType>({} as GameContextType);
 
 const GameContextProvider = ({ children }: Props) => {
   const [gameStatus, setGameStatus] = useState<
@@ -31,12 +24,11 @@ const GameContextProvider = ({ children }: Props) => {
     }, 1000);
   };
 
-
   return (
     <GameContext.Provider
       value={{
         gameStatus,
-        transitionGame
+        transitionGame,
       }}
     >
       {children}
