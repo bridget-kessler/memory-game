@@ -1,7 +1,7 @@
 <div align="center">
   <img src="public/favicon.svg" alt="Logo" width="70" height="70">
   <p align="center" >
-  <a href="#" >View Demo (Coming Soon)</a>
+  <a href="https://bridget-kessler.github.io/memory-game/" >View Demo</a>
   </p>
 </div>
 
