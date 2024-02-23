@@ -14,7 +14,7 @@ type Props = {
 
 const GameOver = ({ exitAnimation }: Props) => {
   const { transitionGame } = useGameContext();
-  const { timeElapsed, newRecord } = useLevelContext();
+  const { timeElapsed, newRecord, difficulty } = useLevelContext();
   const { artCards, category } = useArtContext();
   const [open, setOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<string>("");
@@ -47,19 +47,23 @@ const GameOver = ({ exitAnimation }: Props) => {
         </button>
         <ArtDetails selectedArtId={selectedArt} />
       </SwipeableDrawer>
-      <div className="max-w-[27rem] mx-auto">
+      <div className="max-w-[27rem] mx-auto my-5">
         <h1>Game Over</h1>
-        <p>Category: {category}</p>
-        <p>
-          {newRecord ? (
+        <span className="border border-black text-sm  rounded-md py-1 px-2 mr-2 capitalize">
+          Category: {category}
+        </span>
+        <span className="border border-black text-sm  rounded-md py-1 px-2 mr-2 capitalize">
+          Difficulty: {difficulty}
+        </span>
+        <p className="pt-3">
+        {newRecord && (
+          <>
             <span className="bg-[rgb(56,139,218)] text-stone text-sm rounded-md py-1 px-2 mr-2">
               New Record
             </span>
-          ) : (
-            ""
-          )}
-          Time elapsed: {formatTime(timeElapsed)}
-        </p>
+          </>
+        )}
+        Time elapsed: {formatTime(timeElapsed)}</p>
         <h2>Cards From This Round</h2>
         <p>
           Each card includes a close up of a famous work of art. Click on the

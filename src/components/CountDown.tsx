@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState, useContext } from 'react';
-import { GameContext } from '../contexts/GameContext';
+import { useRef, useEffect, useState } from 'react';
+import { useGameContext } from '../contexts/GameContext';
 
 type Props = {
     exitAnimation?: () => void;
@@ -7,7 +7,7 @@ type Props = {
 
 const CountDown = ({ exitAnimation }: Props) => {
     const [countdown, setCountdown] = useState<number>(3);
-    const { transitionGame } = useContext(GameContext);
+    const { transitionGame } = useGameContext()
     const intervalRef= useRef<ReturnType<typeof setInterval>>()
 
     useEffect(() => {

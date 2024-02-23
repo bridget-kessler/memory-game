@@ -1,6 +1,3 @@
-import { IArt } from "../types/types";
-import uniqid from "uniqid";
-
 export const categories: {
   [key: string]: string[] | Array<{ title: string; id: string }>;
 } = {

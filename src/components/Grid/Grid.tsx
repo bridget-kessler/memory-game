@@ -77,7 +77,9 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
                 cursor:
                   matches.includes(artCard.id) ||
                   selected.includes(artCard.key) ||
-                  isPaused || selected.length === 2 || matches.includes(artCard.id)
+                  isPaused ||
+                  selected.length === 2 ||
+                  matches.includes(artCard.id)
                     ? "default"
                     : "pointer",
                 opacity: matches.includes(artCard.id) ? 0 : 1,
@@ -89,13 +91,21 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
                 }
               }}
               // Announce as pressed only if one card is selected
-              aria-pressed={selected.length === 1 && selected.includes(artCard.key) ? true : false}
+              aria-pressed={
+                selected.length === 1 && selected.includes(artCard.key)
+                  ? true
+                  : false
+              }
               // 'Aria-disabled' is the same semantically as 'disabled' but does not prevent focus and click events
-              // If only one card is selected, keep if focusable so title is read but announce that toggle is disabled
-              aria-disabled={selected.length === 1 && selected.includes(artCard.key)}
+              // If only one card is selected, keep it focusable so the title is read aloud but announce that toggle is disabled
+              aria-disabled={
+                selected.length === 1 && selected.includes(artCard.key)
+              }
               // prevent any interaction a) with face down cards while any two cards are face up or b) when game is paused
               disabled={
-                isPaused || (selected.length === 2 && !selected.includes(artCard.key)) || matches.includes(artCard.id)
+                isPaused ||
+                (selected.length === 2 && !selected.includes(artCard.key)) ||
+                matches.includes(artCard.id)
               }
             >
               {
@@ -112,7 +122,7 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
                   <div className="absolute top-0 left-0  h-full w-full backface-hidden bg-transparent rounded-md shadow-[rgba(0,0,0,0.12)_0px_1px_3px,rgba(0,0,0,0.24)_0px_1px_2px] overflow-hidden [transform:rotateY(180deg)]">
                     <img
                       src={artCard.img}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover select-none"
                       alt=""
                     />
                   </div>

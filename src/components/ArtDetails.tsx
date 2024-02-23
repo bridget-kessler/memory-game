@@ -7,7 +7,7 @@ type Props = {
 };
 
 const ArtDetails = ({ selectedArtId }: Props) => {
-  const { art  } = useArtContext();
+  const { art } = useArtContext();
   const selectedArt = art?.filter((el) => el.id === selectedArtId)[0];
   const { src, isBlurred } = useLQIP(
     selectedArt?.img_url,
@@ -20,9 +20,7 @@ const ArtDetails = ({ selectedArtId }: Props) => {
     return (
       <div>
         <h1 className="mb-5">{selectedArt.title}</h1>
-        <figure
-          className="overflow-hidden pb-10"
-        >
+        <figure className="overflow-hidden pb-10">
           <img
             className="rounded-sm object-cover h-full w-full"
             crossOrigin="anonymous"
@@ -57,7 +55,10 @@ const ArtDetails = ({ selectedArtId }: Props) => {
                 </p>
               );
             })}
-            <p className="py-2 whitespace-pre-line">The Art Institute of Chicago</p>
+          <p className="py-2 whitespace-pre-line">
+            <span className="text-neutral-500">Credit: </span>The Art Institute
+            of Chicago
+          </p>
         </>
       </div>
     );
