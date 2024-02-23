@@ -17,7 +17,7 @@ const useRandomArt = () => {
   const { gridSize } = useLevelContext();
   const { gameStatus } = useGameContext();
 
-  const fetchRandomArt = async () => {
+  const fetchRandomArt = async (offset = 0, existingData: null | [] = null) => {
     try {
       if (!category) {
         return;
@@ -55,15 +55,24 @@ const useRandomArt = () => {
             ],
           },
         },
+        from: offset,
         fields:
           "image_id,title,date_display,artist_display,place_of_origin,medium_display,is_public_domain,thumbnail",
-        limit: Math.pow(gridSize, 2) / 2,
+        size: Math.pow(gridSize, 2) / 2 - offset,
       };
+
       const url = `https://api.artic.edu/api/v1/artworks/search?params=${encodeURIComponent(
         JSON.stringify(rawDSLQuery)
       )}`;
 
-      const promise = await fetch(url);
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        "AIC-User-Agent": "Memory Game (artmemorygame7@gmail.com)",
+      });
+
+      const promise = await fetch(url, {
+        headers
+      });
       if (promise.status >= 400) {
         throw new Error();
       } else {
@@ -71,8 +80,8 @@ const useRandomArt = () => {
         const baseURL = `${result.config.iiif_url}/`;
         const { data } = result;
 
-        if (data?.length < (Math.pow(gridSize, 2) / 2)) {
-          throw new Error()
+        if (data?.length < Math.pow(gridSize, 2) / 2 - offset) {
+          throw new Error();
         }
 
         const artData = data.map((artwork: IApiResponseModel): IArt => {
@@ -88,7 +97,7 @@ const useRandomArt = () => {
           } = artwork;
 
           if (!is_public_domain || !image_id || !height || !lqip || !alt_text) {
-            throw new Error();
+            throw new Error("Insufficient data");
           }
 
           return {
@@ -104,43 +113,45 @@ const useRandomArt = () => {
             lqip,
           };
         });
-        localStorage.setItem(category?.title, JSON.stringify(artData));
-        setData(artData);
+        const allData = existingData ? existingData.concat(artData) : artData;
+
+        localStorage.setItem(category.title, JSON.stringify(allData));
+        setData(allData);
+        setIsLoading(false);
       }
     } catch (e) {
-      setCategory({ categoryType: "artist", title: "Claude Monet"})
-      setData(fallbackData)
+      setCategory({ categoryType: "artist", title: "Claude Monet" });
+      setData(fallbackData);
       let message = e instanceof Error ? e.message : "Unknown error";
       setIsError({ message });
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
     if (gameStatus === "start") {
-      setCategory(getRandomCategory())
-      setIsLoading(true)
+      setCategory(getRandomCategory());
+      setIsLoading(true);
     }
     if (gameStatus === "loading") {
       if (category.title === "Claude Monet") {
-        setData(fallbackData)
-        setIsLoading(false)
+        setData(fallbackData);
+        setIsLoading(false);
       } else {
-
         const cachedData = localStorage.getItem(category.title);
-  
+
         if (!cachedData) {
           fetchRandomArt();
         }
-  
+
         if (typeof cachedData === "string") {
           const parsedData = JSON.parse(cachedData);
-  
+
           if (parsedData.length < Math.pow(gridSize, 2) / 2) {
-            fetchRandomArt();
+            fetchRandomArt(parsedData.length, parsedData);
           } else {
             setData(JSON.parse(cachedData));
-            setIsLoading(false)
+            setIsLoading(false);
           }
         }
       }
