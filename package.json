@@ -1,12 +1,11 @@
 {
   "name": "my-first-react-app",
   "private": true,
-  "version": "0.0.0",
-  "type": "commonjs",
+  "version": "1.0.0",
+  "homepage": "https://github.com/bridget-kessler/memory-game",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "build": "vite build",
     "test": "vitest",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

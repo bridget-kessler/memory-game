@@ -33,20 +33,23 @@ This project uses public domain artwork queried from [the Art Institute of Chica
 To start up a local development server, you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en) (which comes with NPM) installed on your computer. Then run the following commands in the terminal:
 
 1. Clone the repository:
-```console
+```
 git clone https://github.com/bridget-kessler/memory-game.git
 ```
 
 2. Move into the newly created memory-game directory:
-```console
+```
 cd memory-game
 ```
 
 3. Install the required dependencies:
-```console
+```
 npm install
 ```
 4. Start the development server, which will use the default port 5173 if not in use, and open localhost:5173 in your web browser:
-```console
+```
 npm run dev
 ```
+
+## License
+[MIT License](https://github.com/bridget-kessler/memory-game?tab=MIT-1-ov-file#readme)
