@@ -17,6 +17,7 @@ const GameBoard = ({ exitAnimation }: Props) => {
   const { transitionGame } = useGameContext();
   const [isPaused, setIsPaused] = useState(false);
   const [score, setScore] = useState(0);
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     if (Math.pow(gridSize, 2) / 2 === score) {
@@ -27,22 +28,22 @@ const GameBoard = ({ exitAnimation }: Props) => {
     }
   }, [score]);
 
+  useEffect(() => {
+    setVisible(true); // Set visibility on initial render to prevent animation jumpiness... better solution?
+  }, [])
+
   return (
-    <div className="grid grid-rows-gameboard h-full my-5">
+    <div className="grid h-full grid-rows-gameboard" style={{ visibility: visible ? "visible" : "hidden"}}>
       <Slide appear={false} direction="down" in={!trigger}>
         <AppBar
           position="sticky"
+          className="px-6 py-3 rounded-full backdrop-blur mx-auto self-end"
           sx={{
             "&.MuiPaper-root": {
-              top: "1rem",
-              height: "fit-content",
               width: "fit-content",
-              padding: ".6rem 1rem",
               background: "transparent",
-              backdropFilter: "blur(5px)",
               color: "black",
-              margin: "auto",
-              borderRadius: "3rem",
+              top: "1rem",
             },
           }}
         >
@@ -57,17 +58,16 @@ const GameBoard = ({ exitAnimation }: Props) => {
       <PauseOverlay isPaused={isPaused}>
         <Grid score={score} setScore={setScore} isPaused={isPaused} />
       </PauseOverlay>
-      <div className="m-auto flex items-center justify-center w-[18rem] gap-5 bg-black text-stone px-4 py-2 rounded-full sticky bottom-5 mb-10">
+      <div className="px-6 w-full sm:w-fit py-3 mx-auto flex h-fit flex-wrap items-center justify-center gap-3 bg-black text-stone rounded-full sticky bottom-5">
         <p className="m-0">{"Matches found: " + score}</p>
-        <div className="grow">
+        <div className="grow xs:min-w-[6rem] min-w-full">
           <LinearProgress
+            className="border border-stone rounded-full"
             variant="determinate"
             value={(score * 100) / (Math.pow(gridSize, 2) / 2)}
             sx={{
               height: "20px",
-              border: "1px solid #e6e1dd",
               backgroundColor: "transparent",
-              borderRadius: "10px",
               "& .MuiLinearProgress-bar": {
                 backgroundColor: "#e6e1dd",
               },

@@ -30,7 +30,7 @@ const StartGame = ({ exitAnimation }: Props) => {
 
   return (
     <>
-      <div className="max-w-sm mx-auto w-fit-content flex flex-col justify-center h-full">
+      <div className="max-w-sm mx-auto w-fit flex flex-col justify-center h-full">
         <h1>Memory Game</h1>
         <form className="" onSubmit={handleSubmit}>
           <label className="mt-3 text-neutral-600" id="radio-group-label">

@@ -46,7 +46,7 @@ const Stopwatch = ({ isPaused, score }: Props) => {
       <span className="sr-only">
         Time elapsed: {formatTime(time)}
       </span>
-      <div role="timer" aria-hidden>
+      <div role="timer" className="text-center" aria-hidden>
         <span>{minutes} : </span>
         <span>{seconds} : </span>
         <span>{milliseconds}</span>

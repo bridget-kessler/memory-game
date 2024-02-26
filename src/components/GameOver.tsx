@@ -56,21 +56,21 @@ const GameOver = ({ exitAnimation }: Props) => {
           Difficulty: {difficulty}
         </span>
         <p className="pt-3">
-        {newRecord && (
-          <>
+          {newRecord && (
             <span className="bg-[rgb(56,139,218)] text-stone text-sm rounded-md py-1 px-2 mr-2">
               New Record
             </span>
-          </>
-        )}
-        Time elapsed: {formatTime(timeElapsed)}</p>
+          )}
+          {formatTime(timeElapsed) &&
+            `Time elapsed: ${formatTime(timeElapsed)}`}
+        </p>
         <h2>Cards From This Round</h2>
         <p>
           Each card includes a close up of a famous work of art. Click on the
           cards below to learn more about each piece of art.
         </p>
         <div
-          className={`grid gap-4 w-fit max-w-full mt-5 mb-5 grid-rows-cards grid-cols-cards`}
+          className={`grid gap-4 w-fit max-w-full mt-5 mb-5 grid-cols-cards`}
         >
           {artCards?.map((artCard: IArtCard) => {
             return (

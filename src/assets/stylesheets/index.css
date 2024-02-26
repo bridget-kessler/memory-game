@@ -23,14 +23,13 @@
   body {
     @apply bg-stone;
   }
+  html {
+    @apply text-[16px] md:text-[19px]
+  }
   *:focus {
-    @apply outline-none shadow-[0_0_0_4px_rgb(56,139,218)];
+    @apply outline-none shadow-[0_0_0_4px_rgb(56,139,218)] block appearance-none;
   }
 }
 
 @tailwind components;
 @tailwind utilities;
-
-html {
-  font-size: 22px;
-}

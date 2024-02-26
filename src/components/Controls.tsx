@@ -6,13 +6,13 @@ import { IoPlay } from "react-icons/io5";
 import { GameContext } from "../contexts/GameContext";
 import { Tooltip, TooltipProps, tooltipClasses } from "@mui/material";
 import { LevelContext } from "../contexts/LevelContext";
-import {styled} from "@mui/system";
+import { styled } from "@mui/system";
 
 type Props = {
   isPaused: boolean;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
   score: number;
-  exitAnimation?: () => void
+  exitAnimation?: () => void;
 };
 
 const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -31,8 +31,10 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
   const { transitionGame } = useContext(GameContext);
 
   return (
-    <div className="flex flex-wrap gap-3 items-center">
-      <Stopwatch isPaused={isPaused} score={score} />
+    <div className="flex justify-center flex-wrap gap-3 items-center">
+      {window.matchMedia("(min-width: 360px)").matches && (
+        <Stopwatch isPaused={isPaused} score={score} />
+      )}
       <StyledTooltip title={isPaused ? "Resume" : "Pause"} placement="bottom">
         <button
           onClick={() => setIsPaused(!isPaused)}
@@ -50,7 +52,7 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
           onClick={() => {
             transitionGame("start");
             if (exitAnimation) {
-              exitAnimation()
+              exitAnimation();
             }
           }}
           className="bg-black rounded-full flex items-center justify-center h-8 w-8 p-2"
@@ -62,7 +64,7 @@ const Controls = ({ isPaused, setIsPaused, score, exitAnimation }: Props) => {
         title={`There are ${
           Math.pow(gridSize, 2) / 2
         } pairs of matching cards in this deck. Flip over the cards until you've found all the matches! Only two cards can be face up at the same time.`}
-        placement="bottom-end"
+        placement="bottom"
       >
         <button className="bg-black rounded-full flex items-center justify-center h-8 text-stone px-3">
           Hint

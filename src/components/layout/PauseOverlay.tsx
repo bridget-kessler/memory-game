@@ -13,7 +13,7 @@ const PauseOverlay = ({ children, isPaused }: Props) => {
         style={{
           opacity: isPaused ? 0.5 : 1,
         }}
-        className="flex py-5 overflow-auto"
+        className="flex py-10 overflow-auto"
       >
         <AriaLiveRegion>
           {isPaused ? "Game is paused" : "Game has resumed"}

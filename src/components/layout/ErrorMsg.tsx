@@ -1,3 +1,4 @@
+import { useGameContext } from "../../contexts/GameContext";
 import SlideIn from "./SlideIn";
 import { RiErrorWarningFill } from "react-icons/ri";
 
@@ -7,7 +8,6 @@ type Props = {
 }
 
 const ErrorMsg = ({ error, resetErrorBoundary }: Props) => {
-
   return (
     <div className="min-h-screen grid overflow-clip">
       <SlideIn>

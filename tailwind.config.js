@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin')
-const colors = require('@mui/material/colors'); // for mui v4
 
 // Register static utility styles for backface visibility
 const backfaceVisibility = plugin( ({addUtilities}) => {
@@ -22,12 +21,12 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'cards': 'repeat(auto-fit, minmax(min(100%, 6rem), 6rem))',
+        'cards': 'repeat(auto-fit, min(100%, 5rem))',
+        'md-cards': 'repeat(auto-fit, min(100%, 6rem))',
       },
       gridTemplateRows: {
-        'gameboard': 'auto 1fr',
         'loading-screen': '1fr auto',
-        'cards': `repeat(auto-fill, 6rem)`,
+        'gameboard': `1fr auto 1fr`,
       },
       boxShadow: {
         'button': '12px 12px 0px 0px rgba(0, 0, 0, 1)',
@@ -46,6 +45,9 @@ module.exports = {
       },
       colors: {
         'stone': '#e6e1dd',
+      },
+      screens: {
+        'xs': '400px',
       }
     },
   },

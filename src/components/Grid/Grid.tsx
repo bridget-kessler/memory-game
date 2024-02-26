@@ -5,6 +5,7 @@ import AriaLiveRegion from "../layout/AriaLiveRegion";
 import shuffleArray from "../../utils/shuffleArray";
 import uniqid from "uniqid";
 import { IArtCard } from "../../types/types";
+import { useErrorBoundary } from "react-error-boundary";
 
 type Props = {
   score: number;
@@ -31,6 +32,8 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
     }
   }, [artCards?.length]);
 
+  
+
   useEffect(() => {
     if (targetIds.length === 1) {
       setAriaMessage("");
@@ -56,7 +59,7 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
       <AriaLiveRegion>{ariaMessage}</AriaLiveRegion>
       <div
         data-testid="grid"
-        className={`grid w-full m-auto gap-4 max-w-full justify-center grid-rows-cards grid-cols-cards`}
+        className={`grid w-full m-auto gap-4 justify-center grid-cols-cards sm:grid-cols-md-cards`}
         style={{
           maxWidth: `${gridSize * 6 + gridSize - 1}rem`,
         }}
@@ -72,7 +75,7 @@ const Grid = ({ score, setScore, isPaused }: Props) => {
               }
               key={artCard.key}
               id={`${artCard.id}`}
-              className={"card transition rounded-md w-[6rem] h-[6rem]"}
+              className={"card transition rounded-md w-[5rem] sm:w-[6rem] h-[5rem] sm:h-[6rem]"}
               style={{
                 cursor:
                   matches.includes(artCard.id) ||
