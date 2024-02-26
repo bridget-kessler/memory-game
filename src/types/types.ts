@@ -64,3 +64,6 @@ export const levelsArray = Object.entries(levels) as tLevelsArray;
 export type tBestTimes = {
   [key in tLevelsKey]: number;
 }
+
+export const gameStatuses = ['loading', 'start', 'active', 'over'] as const;
+export type tGameStatus = typeof gameStatuses[number];

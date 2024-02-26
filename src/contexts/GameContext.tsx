@@ -1,23 +1,22 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import { tGameStatus } from "../types/types";
 
 type Props = {
   children: ReactNode;
 };
 
 type GameContextType = {
-  gameStatus: string;
-  transitionGame: (newStatus: "start" | "loading" | "active" | "over") => void;
+  gameStatus: tGameStatus;
+  transitionGame: (newStatus: tGameStatus) => void;
 };
 
 const GameContext = createContext<GameContextType>({} as GameContextType);
 
 const GameContextProvider = ({ children }: Props) => {
-  const [gameStatus, setGameStatus] = useState<
-    "start" | "loading" | "active" | "over"
-  >("start");
+  const [gameStatus, setGameStatus] = useState<tGameStatus>("start");
 
   const transitionGame = (
-    newStatus: "start" | "loading" | "active" | "over"
+    newStatus: tGameStatus
   ) => {
     setTimeout(() => {
       setGameStatus(newStatus);

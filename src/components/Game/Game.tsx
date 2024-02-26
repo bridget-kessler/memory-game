@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { FC } from "react";
 import StartGame from "../StartGame";
 import { useContext } from "react";
 import { GameContext } from "../../contexts/GameContext";
@@ -7,69 +7,44 @@ import SlideIn from "../layout/SlideIn";
 import GameBoard from "../Gameboard";
 import GameOver from "../GameOver";
 import AriaLiveRegion from "../layout/AriaLiveRegion";
-import { ErrorBoundary } from "react-error-boundary";
-import ErrorMsg from "../layout/ErrorMsg";
+import { tGameStatus } from "../../types/types";
 
 const Game = () => {
   const { gameStatus } = useContext(GameContext);
 
-  const message = () => {
-      switch(gameStatus) {
-          case "loading":
-              return (
-                  <>Game is loading</>
-              );
-          case "active":
-              return (
-                  <>Game started</>
-              );
-          case "over":
-              return (
-                  <>Gameover</>
-              );
-          default:
-              return "";
-      }
-  }
+  const game: {
+    [key in tGameStatus]: { ariaMessage?: string; component: FC<any> };
+  } = {
+    loading: {
+      ariaMessage: "Game is loading. Please wait.",
+      component: LoadingScreen,
+    },
+    active: {
+      ariaMessage: "Game started",
+      component: GameBoard,
+    },
+    over: {
+      ariaMessage: "Game over",
+      component: GameOver,
+    },
+    start: {
+      ariaMessage: "",
+      component: StartGame,
+    },
+  };
 
-  const gameScreen = (): ReactNode  => {
-    switch(gameStatus) {
-      case 'loading':
-          return (
-          <SlideIn>
-             <LoadingScreen />
-          </SlideIn>
-        );
-      case 'active': 
-          return (
-            <SlideIn>
-              <GameBoard />
-            </SlideIn>
-          );
-      case 'over':
-        return (
-          <SlideIn>
-            <GameOver />
-          </SlideIn>
-        );
-      default:
-        return (
-          <SlideIn>
-            <StartGame />
-          </SlideIn>
-        );
-    }
-  }
+  const { ariaMessage = "", component: GameScreen } = game[gameStatus];
 
   return (
-       <ErrorBoundary fallbackRender={ErrorMsg} >
-
-  <main className="min-h-screen grid overflow-clip">
-    <AriaLiveRegion>{message()}</AriaLiveRegion>
-    {gameScreen()}
-  </main>
-  </ErrorBoundary>
-  )
-}
+    <main className="min-h-dvh grid overflow-clip">
+      <AriaLiveRegion>
+        <p>{ariaMessage}</p>
+      </AriaLiveRegion>
+      <SlideIn>
+        <GameScreen />
+      </SlideIn>
+    </main>
+  );
+};
 
 export default Game;

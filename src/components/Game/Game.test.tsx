@@ -1,12 +1,15 @@
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 import Game from "./Game";
-import { GameContext } from "../../contexts/GameContext";
+import { GameContext, GameContextProvider } from "../../contexts/GameContext";
 
 describe("Game", () => {
-
-  it("It should render the an aria live region", () => {
-    const { getByTestId } = render(<Game />);
+  it("It should render the aria live region", () => {
+    const { getByTestId } = render(
+      <GameContextProvider>
+        <Game />
+      </GameContextProvider>
+    );
     expect(getByTestId("aria-live")).toBeInTheDocument();
   });
 
