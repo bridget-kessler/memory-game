@@ -5,15 +5,9 @@ const createDeck = (
   data: IArt[],
   gridSize: tLevelsValue
 ): Promise<IArtCard[]> => {
-  let promises = [];
-
-  for (let i = 0; i < Math.pow(gridSize, 2) / 2; i++) {
-    if (data[i]) {
-      promises.push(createArtCard(data[i]));
-    }
-  }
-
-  return Promise.all(promises);
+  return Promise.all(
+    data.slice(0, Math.pow(gridSize, 2) / 2).map(async el => await createArtCard(el))
+  );
 };
 
 export default createDeck;

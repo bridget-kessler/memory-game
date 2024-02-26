@@ -15,6 +15,10 @@ const createArtCard = async (art: IArt): Promise<IArtCard> => {
 
   const image: HTMLImageElement = await loadImage(art.img_url);
 
+  if (!image) {
+    return image;
+  }
+
   ctx?.drawImage(
     image,
     Math.floor(Math.random() * (843 - 120)),
@@ -35,13 +39,12 @@ const createArtCard = async (art: IArt): Promise<IArtCard> => {
     key: uniqid(),
     img: url,
   };
-
 };
 
 const loadImage = (src: string): Promise<HTMLImageElement> => {
   return new Promise((resolve, reject) => {
     const img = new Image(843);
-    img.crossOrigin = "anonymous"; // Necessary when using Canvas API
+    img.crossOrigin = "anonymous"; // Fetch with CORS request to avoid 'tainted' error -- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#crossorigin
     img.src = src;
     img.onload = () => resolve(img);
     img.onerror = () => reject(img);

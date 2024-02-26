@@ -1,7 +1,5 @@
 import {
-  Dispatch,
   ReactNode,
-  SetStateAction,
   createContext,
   useContext,
   useEffect,
@@ -11,8 +9,8 @@ import { IArt, IArtCard } from "../types/types";
 import useRandomArt from "../hooks/useRandomArt";
 import { fallbackData } from "../assets/data/fallbackData";
 import { useLevelContext } from "./LevelContext";
-import { useGameContext } from "./GameContext";
 import createDeck from "../utils/createDeck";
+import { useErrorBoundary } from "react-error-boundary";
 
 type Props = {
   children: ReactNode;
@@ -23,7 +21,6 @@ type ArtContextType = {
   art: Array<IArt> | null;
   category: string | undefined;
   artCards: Array<IArtCard>;
-  setArtCards: Dispatch<SetStateAction<IArtCard[]>>;
 };
 
 const ArtContext = createContext<ArtContextType>({} as ArtContextType);
@@ -31,6 +28,7 @@ const ArtContext = createContext<ArtContextType>({} as ArtContextType);
 // it can be useful when testing components in isolation when they're not wrapped with a provider
 
 const ArtContextProvider = ({ children }: Props) => {
+  const { showBoundary } = useErrorBoundary();
   const { gridSize } = useLevelContext();
   const { category, data, isLoading } = useRandomArt();
   const [artCards, setArtCards] = useState<Array<IArtCard>>(
@@ -39,7 +37,9 @@ const ArtContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      createDeck(data, gridSize).then((res) => setArtCards(res.slice(0, Math.pow(gridSize, 2) / 2)));
+      createDeck(data, gridSize).then((res) =>
+        setArtCards(res.slice(0, Math.pow(gridSize, 2) / 2))
+      ).catch(err => showBoundary(err))
     }
   }, [isLoading]);
 
@@ -49,8 +49,7 @@ const ArtContextProvider = ({ children }: Props) => {
         isArtLoading: isLoading,
         art: data || fallbackData,
         category: category?.title,
-        artCards,
-        setArtCards,
+        artCards
       }}
     >
       {children}
