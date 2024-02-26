@@ -42,18 +42,20 @@ const ArtDetails = ({ selectedArtId }: Props) => {
               )
             )
             .map((item, i) => {
-              return (
-                // white-space pre-line treats white space as a new line
-                <p
-                  key={i}
-                  className="py-2 border-b border-black whitespace-pre-line"
-                >
-                  <span className="text-neutral-500">
-                    {capitalize(item[0].replaceAll("_", " "))}:{" "}
-                  </span>
-                  {item[1]}
-                </p>
-              );
+              if (item[1]) {
+                return (
+                  // white-space pre-line treats white space as a new line
+                  <p
+                    key={i}
+                    className="py-2 border-b border-black whitespace-pre-line"
+                  >
+                    <span className="text-neutral-500">
+                      {capitalize(item[0].replaceAll("_", " ")) + ": "}
+                    </span>
+                    {item[1]}
+                  </p>
+                );
+              }
             })}
           <p className="py-2 whitespace-pre-line">
             <span className="text-neutral-500">Credit: </span>The Art Institute

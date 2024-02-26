@@ -70,7 +70,7 @@ const GameOver = ({ exitAnimation }: Props) => {
           cards below to learn more about each piece of art.
         </p>
         <div
-          className={`grid gap-4 w-fit max-w-full mt-5 mb-5 grid-cols-cards`}
+          className={`grid gap-4 w-full mt-5 mb-10 grid-cols-cards`}
         >
           {artCards?.map((artCard: IArtCard) => {
             return (
@@ -96,7 +96,7 @@ const GameOver = ({ exitAnimation }: Props) => {
               exitAnimation();
             }
           }}
-          className="bg-black text-white px-3 py-1 rounded-full mt-5"
+          className="bg-black text-white px-3 py-1 rounded-full"
         >
           Play Again
         </button>
